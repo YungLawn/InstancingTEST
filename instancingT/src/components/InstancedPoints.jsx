@@ -3,10 +3,13 @@ import * as THREE from 'three';
 
 // re-use for instance computations
 const scratchObject3D = new THREE.Object3D();
+const tempColor = new THREE.Color()
 
 const InstancedPoints = ({ data }) => {
   const meshRef = React.useRef();
   const numPoints = data.length;
+  const colorArray = React.useMemo(() => Float32Array.from(new Array(data.length).fill().flatMap((_, i) => tempColor.set(data[i].col).toArray())), [])
+  console.log(colorArray)
 
   // update instance matrices only when needed
   React.useEffect(() => {
@@ -35,8 +38,10 @@ const InstancedPoints = ({ data }) => {
       args={[null, null, numPoints]}
       frustumCulled={false}
     >
-      <boxBufferGeometry attach="geometry" args={[1, 0.25, 1]} />
-      <meshStandardMaterial attach="material" color="#fff" />
+      <boxBufferGeometry attach="geometry" args={[1, 0.25, 1]}>
+        <instancedBufferAttribute attach="attributes-color" args={[colorArray, 3]} />
+      </boxBufferGeometry>
+      <meshStandardMaterial attach="material" color="#fff" vertexColors/>
     </instancedMesh>
   );
 };

@@ -4,8 +4,8 @@ const G = '#0f0';
 const B = '#00f';
 const W = '#fff';
 export const nuclides = [
-    {y:0,x:1,col: R},
-    {y:1,x:0,col: R},
+    {y:0,x:1,col: B},
+    {y:1,x:0,col: G},
     {y:1,x:1,col: R},
     {y:1,x:2,col: R},
     {y:1,x:3,col: R},
