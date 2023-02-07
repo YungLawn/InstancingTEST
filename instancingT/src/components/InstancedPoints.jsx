@@ -41,7 +41,7 @@ const InstancedPoints = ({ data }) => {
       <boxBufferGeometry attach="geometry" args={[1, 0.25, 1]}>
         <instancedBufferAttribute attach="attributes-color" args={[colorArray, 3]} />
       </boxBufferGeometry>
-      <meshStandardMaterial attach="material" color="#fff" vertexColors/>
+      <meshStandardMaterial attach="material" vertexColors/>
     </instancedMesh>
   );
 };
