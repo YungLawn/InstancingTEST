@@ -4,9 +4,7 @@ import * as THREE from 'three'
 import niceColors from 'nice-color-palettes'
 
 import { useSpring } from '@react-spring/core'
-import { animated } from '@react-spring/three'
-
-// import './styles.css'
+import { a } from '@react-spring/three'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
@@ -48,9 +46,9 @@ export default function SpringTest() {
     []
   )
 
-  const { scalex } = useSpring({ scalex: 1 })
+  // const { scalex } = useSpring({ scalex: 1 })
 
-  // const [{ scalex }] = useSpring({ scalex: 1, config: { mass: 5, tension: 1000, friction: 50, precision: 0.0001 } }, [hovered])
+  const [{ scalex }] = useSpring({ scalex: 1, config: { mass: 5, tension: 1000, friction: 50, precision: 0.0001 } }, [hovered])
 
   useEffect(() => {
     scalex.start({
@@ -77,7 +75,7 @@ export default function SpringTest() {
   })
 
   return (
-    <animated.instancedMesh
+    <a.instancedMesh
       ref={meshRef}
       args={[null, null, NB_ITEMS]}
       onPointerMove={(e) => setHover(e.instanceId)}
@@ -85,10 +83,10 @@ export default function SpringTest() {
       position={centerGroup}
       >
       <boxBufferGeometry attach="geometry" args={[0.9, 0.9, 0.9]}>
-        <instancedBufferAttribute attachObject={['attributes-color']} args={[colorArray, 3]} />
+        <instancedBufferAttribute attachObject={['attributes', 'color']} args={[colorArray, 3]} />
       </boxBufferGeometry>
-      <meshPhongMaterial vertexColors />
-    </animated.instancedMesh>
+      <meshPhongMaterial vertexColors={THREE.VertexColors} />
+    </a.instancedMesh>
   )
 }
 

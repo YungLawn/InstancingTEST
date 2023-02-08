@@ -3,6 +3,7 @@ import {Canvas} from '@react-three/fiber';
 import {Stats, Stars} from '@react-three/drei';
 import SpecialControls from './SpecialControls';
 import InstancedPoints from './InstancedPoints';
+import SpringTest from './SpringTest';
 
 export default function NuclideScene( {data} ) {
     const [layout, setLayout] = React.useState('grid');
@@ -16,6 +17,7 @@ export default function NuclideScene( {data} ) {
             <pointLight position={[0, -20, 100]} lookAt={[0,0,0]} intensity={1}/>
 
             <InstancedPoints data={data}/>
+            {/* <SpringTest data={data}/> */}
 
             <Stars radius={200}/>
             <Stats showPanel={4}/>
