@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { nuclides } from './components/data/nuclides'
 import NuclideScene from './components/NuclideScene'
+import SpringTest from './components/SpringTest'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,7 +9,8 @@ function App() {
   return (
     <div className="App">
         <div className='scene-container'>
-            <NuclideScene data={nuclides}/>
+            {/* <NuclideScene data={nuclides}/> */}
+            <SpringTest/>
         </div>
 
     </div>
