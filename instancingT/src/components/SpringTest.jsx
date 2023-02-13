@@ -29,7 +29,7 @@ function updateInstancedMeshMatrices({ mesh, scalex, hovered }) {
 
       if (id === hovered) {
         tempObject.position.set(x, 0, y)
-        tempObject.scale.set(1, scalex, 1)
+        tempObject.scale.set(1, scalex * 2.5, 1)
         tempObject.updateMatrix()
         mesh.setMatrixAt(hovered, tempObject.matrix)
         mesh.instanceMatrix.needsUpdate = true
@@ -38,6 +38,7 @@ function updateInstancedMeshMatrices({ mesh, scalex, hovered }) {
 }
 
 export default function SpringTest() {
+  // console.log(colors)
   const [hovered, setHover] = useState()
   const meshRef = useRef()
 
@@ -46,14 +47,14 @@ export default function SpringTest() {
     []
   )
 
-  // const { scalex } = useSpring({ scalex: 1 })
+  const { scalex } = useSpring({ scalex: 1 })
 
-  const [{ scalex }] = useSpring({ scalex: 1, config: { mass: 5, tension: 1000, friction: 50, precision: 0.0001 } }, [hovered])
+  // const [{ scalex }] = useSpring({ scalex: 1, config: { mass: 5, tension: 1000, friction: 50, precision: 0.0001 } }, [hovered])
 
   useEffect(() => {
     scalex.start({
-      from: { scalex: hovered ? 1 : 8 },
-      to: { scalex: hovered ? 8 : 1 },
+      from: { scalex: hovered ? 1 : 2 },
+      to: { scalex: hovered ? 2 : 1 },
       reset: true,
       onChange: (props, spring) => {
         updateInstancedMeshMatrices({ mesh: meshRef.current, scalex: spring.get(), hovered })
@@ -65,7 +66,7 @@ export default function SpringTest() {
     for (let x = 0; x < WIDTH; x++)
       for (let y = 0; y < HEIGHT; y++) {
         const id = i++
-
+        // console.log(id);
         tempObject.position.set(x, 0, y)
         tempObject.scale.set(1, 1, 1)
         tempObject.updateMatrix()
@@ -78,14 +79,14 @@ export default function SpringTest() {
     <a.instancedMesh
       ref={meshRef}
       args={[null, null, NB_ITEMS]}
-      onPointerMove={(e) => setHover(e.instanceId)}
-      onPointerOut={(e) => setHover(undefined)}
+      onPointerMove={(e) => {e.stopPropagation; setHover(e.instanceId)}}
+      onPointerOut={(e) => {e.stopPropagation; setHover(undefined)}}
       position={centerGroup}
       >
       <boxBufferGeometry attach="geometry" args={[0.9, 0.9, 0.9]}>
-        <instancedBufferAttribute attachObject={['attributes', 'color']} args={[colorArray, 3]} />
+        <instancedBufferAttribute attach="attributes-color" args={[colorArray, 3]} />
       </boxBufferGeometry>
-      <meshPhongMaterial vertexColors={THREE.VertexColors} />
+      <meshPhongMaterial attach="material" vertexColors />
     </a.instancedMesh>
   )
 }
