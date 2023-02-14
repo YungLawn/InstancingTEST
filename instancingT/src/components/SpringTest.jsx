@@ -3,8 +3,8 @@ import React, { useRef, useMemo, useState, useEffect } from 'react'
 import * as THREE from 'three'
 import niceColors from 'nice-color-palettes'
 
-import { useSpring } from '@react-spring/core'
-import { a } from '@react-spring/three'
+// import { useSpring } from '@react-spring/core'
+import { a, useSpring } from '@react-spring/three'
 
 const tempObject = new THREE.Object3D()
 const tempColor = new THREE.Color()
@@ -79,8 +79,8 @@ export default function SpringTest() {
     <a.instancedMesh
       ref={meshRef}
       args={[null, null, NB_ITEMS]}
-      onPointerMove={(e) => {e.stopPropagation; setHover(e.instanceId)}}
-      onPointerOut={(e) => {e.stopPropagation; setHover(undefined)}}
+      onPointerMove={(e) => {setHover(e.instanceId)}}
+      onPointerOut={(e) => {setHover(undefined)}}
       position={centerGroup}
       >
       <boxBufferGeometry attach="geometry" args={[0.9, 0.9, 0.9]}>

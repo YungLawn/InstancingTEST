@@ -16,8 +16,8 @@ export default function NuclideScene( {data} ) {
             <ambientLight intensity={0.25}/>
             <pointLight position={[0, -20, 100]} lookAt={[0,0,0]} intensity={1}/>
 
-            <InstancedPoints data={data}/>
-            {/* <SpringTest data={data}/> */}
+            {/* <InstancedPoints data={data}/> */}
+            <SpringTest data={data}/>
 
             <Stars radius={200}/>
             <Stats showPanel={4}/>
