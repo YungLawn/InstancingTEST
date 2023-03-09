@@ -79,8 +79,8 @@ export default function SpringTest() {
     <a.instancedMesh
       ref={meshRef}
       args={[null, null, NB_ITEMS]}
-      onPointerMove={(e) => {setHover(e.instanceId)}}
-      onPointerOut={(e) => {setHover(undefined)}}
+      onPointerMove={(e) => {e.stopPropagation; setHover(e.instanceId)}}
+      onPointerOut={(e) => {e.stopPropagation; setHover(undefined)}}
       position={centerGroup}
       >
       <boxBufferGeometry attach="geometry" args={[0.9, 0.9, 0.9]}>

@@ -40,7 +40,7 @@ const InstancedPoints = ({ data }) => {
       to: { scalex: hover ? 8 : 1 },
       reset: true,
       onChange: (props, spring) => {
-        updateInstancedMeshMatrices({ mesh: meshRef.current, scalex: spring.get(), hover, data })
+        updateInstancedMeshMatrices({ mesh: mesh, scalex: spring.get(), hover, data })
       }
     })
 
